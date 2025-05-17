@@ -2,6 +2,8 @@ let player;
 let bullets = [];
 let fondo;
 let yFondo = -20;
+let enemies = [];
+let direccionEnemigo = 1;
 
 function preload() {
     fondo = loadImage('assets/images/bg-game.png'); 
@@ -11,6 +13,13 @@ function preload() {
 function setup() {
     createCanvas(500, 600);
     player = new Player(240, 530);
+
+    // Creamos los enemigos
+    for (let i = 0; i < 5; i++) {
+        for (let j = 0; j < 3; j++) {
+            enemies.push(new Enemy(80 + i * 70, 60 + j * 60));
+        }
+    }
 }
 
 function draw() {
@@ -22,8 +31,9 @@ function draw() {
     //que la foto se repita verticalmente
     image(fondo, 0, yFondo % height - height, width, height);
     image(fondo, 0, yFondo % height, width, height);
-    
 
+    actualizarNivel1() 
+    
     //juego
     player.dibujar();
     player.mover();
