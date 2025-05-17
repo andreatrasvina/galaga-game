@@ -7,7 +7,7 @@ class Enemy {
     }
   
     update() {
-      this.x += direccionEnemigo;
+      this.x += direccionEnemigo *5;
     }
   
     bajar() {
