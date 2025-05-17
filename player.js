@@ -1,3 +1,4 @@
+
 class Player {
   constructor(x, y) {
     this.x = x;
@@ -14,12 +15,13 @@ class Player {
   }
 
   mover() {
-    if (keyIsPressed) {
-      if (keyCode == RIGHT_ARROW) {
-        this.x += 5;
-      } else if (keyCode == LEFT_ARROW) {
-        this.x -= 5;
-      }
+    if (keyIsDown(RIGHT_ARROW)) {
+        this.x += 3;
     }
+
+    if (keyIsDown(LEFT_ARROW)) {
+        this.x -= 3;
+    }
+    
   }
 }
