@@ -32,7 +32,7 @@ function draw() {
     image(fondo, 0, yFondo % height - height, width, height);
     image(fondo, 0, yFondo % height, width, height);
 
-    actualizarNivel1() 
+    actualizarNivel1();
     
     //juego
     player.dibujar();
@@ -42,12 +42,23 @@ function draw() {
     for (let i = bullets.length - 1; i >= 0; i--) {
         bullets[i].mover();
         bullets[i].dibujar();
-
-        //elimina las que salen de la pantalla
-        if (bullets[i].desaparece()) {
-        bullets.splice(i, 1);
+      
+        for (let j = enemies.length - 1; j >= 0; j--) {
+          if (bullets[i].colision(enemies[j])) {
+            //borra del arreglo el enemigo y bala
+            enemies.splice(j, 1);
+            bullets.splice(i, 1);
+            console.log(enemies);
+            break;
+          }
         }
-    }
+      
+        //desaparece la bala q se va al espacio
+        if (bullets[i] && bullets[i].desaparece()) {
+          bullets.splice(i, 1);
+        }
+      }
+      
 }
 
 //espacio para añadir balas al array
