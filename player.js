@@ -17,13 +17,13 @@ class Player {
   mover() {
     if (keyIsDown(RIGHT_ARROW)) {
       this.x += 10;
-    } if (this.x >= 480) {
+    } if (this.x >= 485) {
       this.x -= 10;
     }
 
     if (keyIsDown(LEFT_ARROW)) {
       this.x -= 10;
-    } if (this.x <= 0) {
+    } if (this.x <= -5) {
       this.x += 10;
     }
 
