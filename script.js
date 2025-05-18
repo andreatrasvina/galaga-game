@@ -74,7 +74,7 @@ function keyPressed() {
     estadoJuego = "nivel1";
   }
 
-  if ((estadoJuego === "nivel1" || estadoJuego === "nivel2") && key === ' ') {
+  if (key === ' ') {
     bullets.push(new Bullet(player.x + player.width / 2, player.y));
   }
 
@@ -91,24 +91,3 @@ function keyPressed() {
 }
 
 
-// Función para inicializar nivel 2
-function iniciarNivel2() {
-  enemies = [];
-  bullets = [];
-  enemyBullets = [];
-  direccionEnemigo = 1;
-  zigzagTimer = 0;
-
-  // Enemigos normales
-  for (let i = 0; i < 4; i++) {
-    enemies.push(new Enemy(60 + i * 80, 60));
-  }
-
-  // Enemigos que disparan
-  for (let i = 0; i < 3; i++) {
-    enemies.push(new ShootingEnemy(70 + i * 100, 140, 20));
-  }
-
-  // Enemigo fuerte
-  enemies.push(new StrongEnemy(width / 2 - 20, 220, 20));
-}
