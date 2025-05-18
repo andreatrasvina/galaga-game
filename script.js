@@ -1,4 +1,6 @@
 let estadoJuego = "menu";
+let enemyBullets = [];  // Necesario para balas enemigas en nivel 2
+let zigzagTimer = 0;    // Timer para zigzag en nivel 2
 
 let player;
 let bullets = [];
@@ -34,51 +36,79 @@ function draw() {
 
       break;
 
-  case "nivel1":
-    nivel1();  
+    case "nivel1":
+      nivel1();
 
-    break;
-        
-  case "nivel2":
-    nivel2();
-            
-    break;
+      break;
 
-  case "nivel3":
-    nivel3();
-            
-    break;
+    case "nivel2":
+      nivel2();
 
-  case "pausa":
-    mostrarPausa();
+      break;
 
-    break;
+    case "nivel3":
+      nivel3();
 
-  case "mostrarVictoria":
-    mostrarVictoria();
-            
-  break;
+      break;
 
-  case "gameOver":
-    mostrarGameOver();
-    break;
-        
+    case "pausa":
+      mostrarPausa();
+
+      break;
+
+    case "mostrarVictoria":
+      mostrarVictoria();
+
+      break;
+
+    case "gameOver":
+      mostrarGameOver();
+      break;
+
   }
 }
 
 //espacio para añadir balas al array
 function keyPressed() {
   if (estadoJuego === "menu" && keyCode === ENTER) {
-      estadoJuego = "nivel1";
-   }
+    estadoJuego = "nivel1";
+  }
 
-  if (estadoJuego === "nivel1" && key === ' ') {
-      bullets.push(new Bullet(player.x + player.width / 2, player.y));
+  if ((estadoJuego === "nivel1" || estadoJuego === "nivel2") && key === ' ') {
+    bullets.push(new Bullet(player.x + player.width / 2, player.y));
   }
 
   if (estadoJuego === "nivel1" && key === 'p') {
-      estadoJuego = "pausa";
+    estadoJuego = "pausa";
   } else if (estadoJuego === "pausa" && key === 'p') {
-      estadoJuego = "nivel1";
+    estadoJuego = "nivel1";
   }
+  // Agrega esta condición para iniciar nivel 2 con la tecla 'n' (opcional)
+  if (estadoJuego !== "nivel2" && key === 'n') {
+    iniciarNivel2();
+    estadoJuego = "nivel2";
+  }
+}
+
+
+// Función para inicializar nivel 2
+function iniciarNivel2() {
+  enemies = [];
+  bullets = [];
+  enemyBullets = [];
+  direccionEnemigo = 1;
+  zigzagTimer = 0;
+
+  // Enemigos normales
+  for (let i = 0; i < 4; i++) {
+    enemies.push(new Enemy(60 + i * 80, 60));
+  }
+
+  // Enemigos que disparan
+  for (let i = 0; i < 3; i++) {
+    enemies.push(new ShootingEnemy(70 + i * 100, 140, 20));
+  }
+
+  // Enemigo fuerte
+  enemies.push(new StrongEnemy(width / 2 - 20, 220, 20));
 }
