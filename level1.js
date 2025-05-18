@@ -22,3 +22,33 @@ function actualizarNivel1() {
     enemy.show();
   }
 }
+
+function nivel1() {
+    // Movimiento fondo
+    yFondo += 2;
+    image(fondo, 0, yFondo % height - height, width, height);
+    image(fondo, 0, yFondo % height, width, height);
+
+    actualizarNivel1();
+
+    player.dibujar();
+    player.mover();
+
+    // Muestra y mueve balas
+    for (let i = bullets.length - 1; i >= 0; i--) {
+        bullets[i].mover();
+        bullets[i].dibujar();
+
+        for (let j = enemies.length - 1; j >= 0; j--) {
+            if (bullets[i].colision(enemies[j])) {
+                enemies.splice(j, 1);
+                bullets.splice(i, 1);
+                break;
+            }
+        }
+
+        if (bullets[i] && bullets[i].desaparece()) {
+            bullets.splice(i, 1);
+        }
+    }
+}
