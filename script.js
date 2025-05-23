@@ -93,18 +93,39 @@ function keyPressed() {
   } else if (estadoJuego === "pausa" && key === 'p') {
     estadoJuego = "nivel1";
   }
+
   //iniciar nivel 2
   if (enemies.length === 0 && estadoJuego === "nivel1") {
   iniciarNivel2();
   estadoJuego = "transicionNivel";
   siguienteNivel = "nivel2";
   tiempoTransicion = 120; // ~2 segundos a 60fps
+  }
+
+  if (enemies.length === 0 && estadoJuego === "nivel2") {
+    iniciarNivel3();
+    estadoJuego = "transicionNivel";
+    siguienteNivel = "nivel3";
+    tiempoTransicion = 120;
+  }
+
+  if (estadoJuego === "gameOver" && keyCode === ENTER) {
+    estadoJuego = "menu";
+    reiniciarJuego();
+  }
 }
 
-if (enemies.length === 0 && estadoJuego === "nivel2") {
-  iniciarNivel3();
-  estadoJuego = "transicionNivel";
-  siguienteNivel = "nivel3";
-  tiempoTransicion = 120;
-}
+function reiniciarJuego() {
+  player = new Player(240, 530);
+  bullets = [];
+  enemies = [];
+  enemyBullets = [];
+  direccionEnemigo = 1;
+  yFondo = 10;
+
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 3; j++) {
+      enemies.push(new Enemy(80 + i * 70, 60 + j * 60));
+    }
+  }
 }

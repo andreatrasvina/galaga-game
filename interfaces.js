@@ -26,7 +26,9 @@ function mostrarGameOver() {
     fill(255, 0, 0);
     textAlign(CENTER, CENTER);
     textSize(32);
-    text("Game Over", width / 2, height / 2);
+    text("Game Over", width / 2, height / 2 - 20);
+    textSize(20);
+    text("Presiona ENTER para regresar al menu", width / 2, height / 2 + 20);
 }
 
 function mostrarTransicionNivel() {
