@@ -72,10 +72,6 @@ function actualizarNivel3() {
 
 // Función que dibuja los elementos del Nivel 3 en cada frame
 function nivel3() {
-  // Movimiento de fondo
-  yFondo += 2;
-  image(fondo, 0, yFondo % height - height, width, height);
-  image(fondo, 0, yFondo % height, width, height);
 
   actualizarNivel3(); // Llama a la lógica de actualización del nivel
 

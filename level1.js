@@ -24,10 +24,6 @@ function actualizarNivel1() {
 }
 
 function nivel1() {
-    // Movimiento fondo
-    yFondo += 2;
-    image(fondo, 0, yFondo % height - height, width, height);
-    image(fondo, 0, yFondo % height, width, height);
 
     actualizarNivel1();
 
