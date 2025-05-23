@@ -2,6 +2,10 @@ let estadoJuego = "menu";
 let enemyBullets = [];  // Necesario para balas enemigas en nivel 2
 let zigzagTimer = 0;    // Timer para zigzag en nivel 2
 
+let mostrarTransicion = false;
+let tiempoTransicion = 0;
+let siguienteNivel = "";
+
 let player;
 let bullets = [];
 
@@ -65,6 +69,12 @@ function draw() {
       mostrarGameOver();
 
       break;
+    
+    case "transicionNivel":
+      mostrarTransicionNivel();
+
+      break;
+
   }
 }
 
@@ -85,12 +95,16 @@ function keyPressed() {
   }
   //iniciar nivel 2
   if (enemies.length === 0 && estadoJuego === "nivel1") {
-    iniciarNivel2();
-    estadoJuego = "nivel2";
-  }
+  iniciarNivel2();
+  estadoJuego = "transicionNivel";
+  siguienteNivel = "nivel2";
+  tiempoTransicion = 120; // ~2 segundos a 60fps
+}
 
-  if (enemies.length === 0 && estadoJuego === "nivel2") {
-    iniciarNivel3();
-    estadoJuego = "nivel3";
-  }
+if (enemies.length === 0 && estadoJuego === "nivel2") {
+  iniciarNivel3();
+  estadoJuego = "transicionNivel";
+  siguienteNivel = "nivel3";
+  tiempoTransicion = 120;
+}
 }

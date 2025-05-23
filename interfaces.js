@@ -28,3 +28,17 @@ function mostrarGameOver() {
     textSize(32);
     text("Game Over", width / 2, height / 2);
 }
+
+function mostrarTransicionNivel() {
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(28);
+  text(`¡Pasaste al siguiente nivel!`, width / 2, height / 2 - 20);
+  text(`Te quedan ${player.lives} vidas`, width / 2, height / 2 + 20);
+
+  tiempoTransicion--;
+
+  if (tiempoTransicion <= 0) {
+    estadoJuego = siguienteNivel;
+  }
+}
