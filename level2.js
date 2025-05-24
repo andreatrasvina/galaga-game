@@ -145,7 +145,7 @@ function actualizarNivel2() {
     } else {
       for (let j = bullets.length - 1; j >= 0; j--) {
         if (bullets[j].colision(enemies[i])) {
-          enemies.splice(i, 1);
+          enemies.splice(i, 1)
           bullets.splice(j, 1);
           break;
         }
