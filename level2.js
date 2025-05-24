@@ -88,9 +88,6 @@ class EnemyBullet {
     this.y += this.speed;
   }
 
-  desaparece() {
-    return this.y > height;
-  }
 
   dibujar() {
     fill(255, 0, 255);
@@ -179,9 +176,6 @@ function nivel2() {
       if (player.lives <= 0) {
         estadoJuego = "gameOver";
       }
-    }
-    if (enemyBullets[i].desaparece()) {
-      enemyBullets.splice(i, 1);
     }
   }
 }

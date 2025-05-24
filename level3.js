@@ -99,9 +99,6 @@ function nivel3() {
         estadoJuego = "gameOver"; // Si no quedan vidas, Game Over
       }
     }
-    if (enemyBullets[i].desaparece()) {
-      enemyBullets.splice(i, 1);
-    }
   }
 }
 
