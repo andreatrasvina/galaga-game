@@ -1,4 +1,4 @@
-let estadoJuego = "menu";
+let estadoJuego = "gameOver";
 let enemyBullets = [];  // Necesario para balas enemigas en nivel 2
 let zigzagTimer = 0;    // Timer para zigzag en nivel 2
 
@@ -104,7 +104,7 @@ function keyPressed() {
     if (keyCode === ENTER) {
       const input = document.getElementById("nombreInput");
       const nombreIngresado = input.value.trim() || "Jugador";
-      guardarPuntaje(nombreIngresado, player.score); 
+      guardarPuntaje(nombreIngresado, player.score);
       ocultarInputNombre();
       estadoJuego = "menu";
       reiniciarJuego();
