@@ -16,6 +16,35 @@ function actualizarNivel1() {
     }
   }
 
+
+  for (let i = enemies.length - 1; i >= 0; i--) {
+    let currentEnemy = enemies[i];
+    currentEnemy.update();
+    currentEnemy.show();
+
+    // colision con el player 
+    if (currentEnemy.y + currentEnemy.h > height) {
+      console.log("¡Un enemigo llegó al fondo! Game Over.");
+      estadoJuego = "gameOver";
+      return;
+
+    }
+    if (currentEnemy.colisionaConJugador(player)) {
+      console.log("¡Un enemigo colisionó con el jugador! Game Over.");
+      estadoJuego = "gameOver";
+      return;
+    }
+    // *******************************************************************
+
+    for (let j = bullets.length - 1; j >= 0; j--) {
+      if (bullets[j].colision(currentEnemy)) {
+        enemies.splice(i, 1);
+        bullets.splice(j, 1);
+        break;
+      }
+    }
+  }
+
   // Actualiza y dibuja enemigos
   for (let enemy of enemies) {
     enemy.update();

@@ -1,17 +1,6 @@
-// level3.js
-// Este archivo contiene la lógica del Nivel 3.
-// Asume que las clases base (Enemy, Player, Bullet) están definidas en sus respectivos archivos
-// (enemy.js, player.js, bullet.js) y que las clases StrongEnemy, ErraticEnemy y EnemyBullet
-// también están definidas en otros archivos (como level2.js) y se cargan ANTES en index.html.
-
-// NO necesitamos variables globales específicas para un "finalBoss" ni contadores de enemigos destruidos.
-
-// Función principal de actualización de la lógica del Nivel 3
 function actualizarNivel3() {
-  // Lógica de movimiento de grupo para enemigos estándar (verdes)
   let cambiarDireccionGrupo = false;
   for (let enemy of enemies) {
-    // Los ErraticEnemy no siguen el movimiento de grupo
     if (!(enemy instanceof ErraticEnemy) && (enemy.x + enemy.w > width || enemy.x < 0)) {
       cambiarDireccionGrupo = true;
       break;
@@ -22,20 +11,30 @@ function actualizarNivel3() {
     direccionEnemigo *= -1;
     for (let enemy of enemies) {
       if (!(enemy instanceof ErraticEnemy)) {
-        enemy.bajar(); // Los enemigos normales y StrongEnemy bajan
+        enemy.bajar();
       }
     }
   }
 
-  // Iterar sobre todos los enemigos (de atrás hacia adelante para splicear sin problemas)
   for (let i = enemies.length - 1; i >= 0; i--) {
     let currentEnemy = enemies[i];
+    currentEnemy.update();
+    currentEnemy.show();
 
-    currentEnemy.update(); // Todos los enemigos usan su propio método update()
-    currentEnemy.show(); // Dibuja el enemigo
+    // Colisión con el fondo o con el jugador (Game Over)
+    if (currentEnemy.y + currentEnemy.h > height) {
+      console.log("¡Un enemigo llegó al fondo! Game Over.");
+      estadoJuego = "gameOver";
+      return; // Salir de la función inmediatamente si el juego ha terminado
+    }
+    if (currentEnemy.colisionaConJugador(player)) {
+      console.log("¡Un enemigo colisionó con el jugador! Game Over.");
+      estadoJuego = "gameOver";
+      return; // Salir de la función inmediatamente si el juego ha terminado
+    }
 
     // Lógica de disparo enemigo
-    let shootProb = 0.025; // Probabilidad general de disparo
+    let shootProb = 0.025;
     if (currentEnemy instanceof StrongEnemy) {
       shootProb = 0.04;
     }
@@ -49,27 +48,21 @@ function actualizarNivel3() {
         let enemyDestroyed = false;
 
         if (currentEnemy instanceof StrongEnemy) {
-          if (currentEnemy.hit()) { // StrongEnemy tiene vidas
+          if (currentEnemy.hit()) {
             enemies.splice(i, 1);
             enemyDestroyed = true;
           }
-        } else { // Enemy normal o ErraticEnemy se destruyen al primer golpe
+        } else {
           enemies.splice(i, 1);
           enemyDestroyed = true;
         }
 
-        bullets.splice(j, 1); // Quitar la bala del jugador
-        break; // Una bala solo golpea un enemigo
+        bullets.splice(j, 1);
+        break;
       }
     }
   }
-
-  // Condición de victoria: todos los enemigos destruidos
-  if (enemies.length === 0) {
-    estadoJuego = "mostrarVictoria";
-  }
 }
-
 // Función que dibuja los elementos del Nivel 3 en cada frame
 function nivel3() {
 

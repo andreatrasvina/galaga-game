@@ -106,6 +106,7 @@ let enemyShootTimer = 0;
 function actualizarNivel2() {
   let cambiarDireccionGrupo = false;
   for (let enemy of enemies) {
+    // Los ErraticEnemy no siguen el movimiento de grupo
     if (!(enemy instanceof ErraticEnemy) && (enemy.x + enemy.w > width || enemy.x < 0)) {
       cambiarDireccionGrupo = true;
       break;
@@ -121,31 +122,50 @@ function actualizarNivel2() {
     }
   }
 
+  // Iteramos sobre los enemigos de atrás hacia adelante
   for (let i = enemies.length - 1; i >= 0; i--) {
-    enemies[i].update();
-    enemies[i].show();
+    let currentEnemy = enemies[i];
+    currentEnemy.update();
+    currentEnemy.show();
 
-    if (random(1) < (enemies[i] instanceof ErraticEnemy ? 0.02 : 0.008)) {
-      enemyBullets.push(new EnemyBullet(enemies[i].x + enemies[i].w / 2, enemies[i].y + enemies[i].h));
+    // Colisión con el fondo o con el jugador (Game Over)
+    if (currentEnemy.y + currentEnemy.h > height) {
+      console.log("¡Un enemigo llegó al fondo! Game Over.");
+      estadoJuego = "gameOver";
+      return; // Salir de la función inmediatamente si el juego ha terminado
+    }
+    if (currentEnemy.colisionaConJugador(player)) {
+      console.log("¡Un enemigo colisionó con el jugador! Game Over.");
+      estadoJuego = "gameOver";
+      return; // Salir de la función inmediatamente si el juego ha terminado
     }
 
-    if (enemies[i] instanceof StrongEnemy) {
-      for (let j = bullets.length - 1; j >= 0; j--) {
-        if (bullets[j].colision(enemies[i])) {
-          if (enemies[i].hit()) {
+    // Lógica de disparo enemigo
+    let shootProb = 0.025;
+    if (currentEnemy instanceof StrongEnemy) {
+      shootProb = 0.04;
+    }
+    if (random(1) < shootProb) {
+      enemyBullets.push(new EnemyBullet(currentEnemy.x + currentEnemy.w / 2, currentEnemy.y + currentEnemy.h));
+    }
+
+    // Lógica de colisiones de balas del jugador con enemigos
+    for (let j = bullets.length - 1; j >= 0; j--) {
+      if (bullets[j].colision(currentEnemy)) {
+        let enemyDestroyed = false;
+
+        if (currentEnemy instanceof StrongEnemy) {
+          if (currentEnemy.hit()) {
             enemies.splice(i, 1);
+            enemyDestroyed = true;
           }
-          bullets.splice(j, 1);
-          break;
+        } else {
+          enemies.splice(i, 1);
+          enemyDestroyed = true;
         }
-      }
-    } else {
-      for (let j = bullets.length - 1; j >= 0; j--) {
-        if (bullets[j].colision(enemies[i])) {
-          enemies.splice(i, 1)
-          bullets.splice(j, 1);
-          break;
-        }
+
+        bullets.splice(j, 1);
+        break;
       }
     }
   }
