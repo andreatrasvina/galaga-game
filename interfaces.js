@@ -57,3 +57,18 @@ function mostrarTransicionNivel() {
     estadoJuego = siguienteNivel;
   }
 }
+
+function dibujarHUD() {
+  textFont('Press Start 2P');
+  textSize(14);
+  fill(0, 255, 255);
+  noStroke();
+
+  textAlign(LEFT, TOP);
+  text(`Nivel: ${obtenerNumeroNivel()}`, 10, 10);
+  text(`Score: ${player.score}`, 10, 30);
+
+  for (let i = 0; i < player.lives; i++) {
+    image(imgVida, width - (i + 1) * 30 - 10, 10, 24, 24); 
+  }
+}

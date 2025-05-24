@@ -22,6 +22,7 @@ let enemies = [];
 let direccionEnemigo = 1;
 
 let fondo;
+let imgVida;
 let yFondo = 10;
 
 function preload() {
@@ -31,6 +32,7 @@ function preload() {
   strongEnemyImg = loadImage('assets/images/strong.png');
   erraticEnemyImg = loadImage('assets/images/erratic.png');
   bossEnemyImg = loadImage('assets/images/boss.png');
+  imgVida = loadImage('assets/images/vidas.png');
 }
 
 function setup() {
@@ -60,16 +62,19 @@ function draw() {
       break;
     case "nivel1":
       nivel1();
+      dibujarHUD();
 
       break;
     case "nivel2":
       nivel2();
       yFondo += 4;
+      dibujarHUD();
 
       break;
     case "nivel3":
       nivel3();
       yFondo += 6;
+      dibujarHUD();
 
       break;
     case "pausa":
@@ -158,4 +163,11 @@ function reiniciarJuego() {
       enemies.push(new Enemy(80 + i * 70, 60 + j * 60, 5, enemieImg));
     }
   }
+}
+
+function obtenerNumeroNivel() {
+  if (estadoJuego === "nivel1") return 1;
+  if (estadoJuego === "nivel2") return 2;
+  if (estadoJuego === "nivel3") return 3;
+  return "";
 }
