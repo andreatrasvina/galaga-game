@@ -2,6 +2,12 @@ let estadoJuego = "menu";
 let enemyBullets = [];  // Necesario para balas enemigas en nivel 2
 let zigzagTimer = 0;    // Timer para zigzag en nivel 2
 
+let playerImg;
+let enemieImg;
+let strongEnemyImg;
+let erraticEnemyImg;
+let bossEnemyImg;
+
 let mostrarTransicion = false;
 let tiempoTransicion = 0;
 let siguienteNivel = "";
@@ -19,6 +25,11 @@ let yFondo = 10;
 
 function preload() {
   fondo = loadImage('assets/images/bg-game.png');
+  playerImg = loadImage('assets/images/navepro.png');
+  enemieImg = loadImage('assets/images/enemie.png');
+  strongEnemyImg = loadImage('assets/images/strong.png');
+  erraticEnemyImg = loadImage('assets/images/erratic.png');
+  bossEnemyImg = loadImage('assets/images/boss.png');
 }
 
 function setup() {
@@ -28,7 +39,7 @@ function setup() {
   // Creamos los enemigos iniciales para el nivel 1
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 3; j++) {
-      enemies.push(new Enemy(80 + i * 70, 60 + j * 60));
+      enemies.push(new Enemy(80 + i * 70, 60 + j * 60, 5, enemieImg));
     }
   }
 }
@@ -50,7 +61,7 @@ function draw() {
 
       break;
     case "nivel2":
-      nivel2(); 
+      nivel2();
       yFondo += 4;
 
       break;
@@ -61,7 +72,7 @@ function draw() {
       break;
     case "pausa":
       mostrarPausa();
-      
+
       break;
     case "mostrarVictoria":
       mostrarVictoria();
@@ -71,7 +82,7 @@ function draw() {
       mostrarGameOver();
 
       break;
-    
+
     case "transicionNivel":
       mostrarTransicionNivel();
 
@@ -87,33 +98,33 @@ function keyPressed() {
   }
 
   //espacio para añadir balas al array
-  if(key === ' ') {
+  if (key === ' ') {
     bullets.push(new Bullet(player.x + player.width / 2, player.y));
   }
 
-  if((estadoJuego === "nivel1" || estadoJuego === "nivel2" || estadoJuego === "nivel3") && key === 'p'){
-    estadoPrevio = estadoJuego;  
-    estadoJuego = "pausa";       
+  if ((estadoJuego === "nivel1" || estadoJuego === "nivel2" || estadoJuego === "nivel3") && key === 'p') {
+    estadoPrevio = estadoJuego;
+    estadoJuego = "pausa";
   } else if (estadoJuego === "pausa" && key === 'p') {
-    estadoJuego = estadoPrevio;  
+    estadoJuego = estadoPrevio;
   }
 
   //iniciar nivel 2
-  if(enemies.length === 0 && estadoJuego === "nivel1") {
-  iniciarNivel2();
-  estadoJuego = "transicionNivel";
-  siguienteNivel = "nivel2";
-  tiempoTransicion = 90;
+  if (enemies.length === 0 && estadoJuego === "nivel1") {
+    iniciarNivel2();
+    estadoJuego = "transicionNivel";
+    siguienteNivel = "nivel2";
+    tiempoTransicion = 90;
   }
 
-  if(enemies.length === 0 && estadoJuego === "nivel2") {
+  if (enemies.length === 0 && estadoJuego === "nivel2") {
     iniciarNivel3();
     estadoJuego = "transicionNivel";
     siguienteNivel = "nivel3";
     tiempoTransicion = 120;
   }
 
-  if((estadoJuego === "gameOver" || estadoJuego === "mostrarVictoria") && keyCode === ENTER) {
+  if ((estadoJuego === "gameOver" || estadoJuego === "mostrarVictoria") && keyCode === ENTER) {
     estadoJuego = "menu";
     reiniciarJuego();
   }
@@ -129,7 +140,7 @@ function reiniciarJuego() {
 
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 3; j++) {
-      enemies.push(new Enemy(80 + i * 70, 60 + j * 60));
+      enemies.push(new Enemy(80 + i * 70, 60 + j * 60, 5, enemieImg));
     }
   }
 }

@@ -1,11 +1,12 @@
 class Enemy {
-  constructor(x, y, speed = 5) {
+  constructor(x, y, speed = 5, img = null) {
     this.x = x;
     this.y = y;
     this.w = 40;
-    this.h = 20;
-    this.speed = speed; // velocidad personalizada
-
+    this.h = 40;
+    this.speed = speed;
+    this.img = img;
+    this.color = color(255, 0, 0);
   }
 
   update() {
@@ -13,12 +14,15 @@ class Enemy {
   }
 
   bajar() {
-    this.y += this.h;
+    this.y += 20;
   }
 
   show() {
-    fill(0, 255, 0);
-    rect(this.x, this.y, this.w, this.h);
+    if (this.img) {
+      image(this.img, this.x, this.y, this.w, this.h);
+    } else {
+      fill(this.color);
+      rect(this.x, this.y, this.w, this.h);
+    }
   }
-
 }

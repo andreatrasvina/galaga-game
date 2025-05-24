@@ -7,7 +7,7 @@ function actualizarNivel1() {
       break;
     }
   }
-  
+
   // Si hay que cambiar dirección, invierte y baja enemigos
   if (cambiarDireccion) {
     direccionEnemigo *= -1;
@@ -15,7 +15,7 @@ function actualizarNivel1() {
       enemy.bajar();
     }
   }
-  
+
   // Actualiza y dibuja enemigos
   for (let enemy of enemies) {
     enemy.update();
@@ -25,26 +25,26 @@ function actualizarNivel1() {
 
 function nivel1() {
 
-    actualizarNivel1();
+  actualizarNivel1();
 
-    player.dibujar();
-    player.mover();
+  player.dibujar();
+  player.mover();
 
-    // Muestra y mueve balas
-    for (let i = bullets.length - 1; i >= 0; i--) {
-        bullets[i].mover();
-        bullets[i].dibujar();
+  // Muestra y mueve balas
+  for (let i = bullets.length - 1; i >= 0; i--) {
+    bullets[i].mover();
+    bullets[i].dibujar();
 
-        for (let j = enemies.length - 1; j >= 0; j--) {
-            if (bullets[i].colision(enemies[j])) {
-                enemies.splice(j, 1);
-                bullets.splice(i, 1);
-                break;
-            }
-        }
-
-        if (bullets[i] && bullets[i].desaparece()) {
-            bullets.splice(i, 1);
-        }
+    for (let j = enemies.length - 1; j >= 0; j--) {
+      if (bullets[i].colision(enemies[j])) {
+        enemies.splice(j, 1);
+        bullets.splice(i, 1);
+        break;
+      }
     }
+
+    if (bullets[i] && bullets[i].desaparece()) {
+      bullets.splice(i, 1);
+    }
+  }
 }

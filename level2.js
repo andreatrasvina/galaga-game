@@ -1,20 +1,26 @@
-// level2.js
-// Asume que la clase Enemy está definida en enemy.js y cargada antes.
-
 class StrongEnemy extends Enemy {
-  constructor(x, y, speed = 3) {
-    super(x, y, speed);
+
+  constructor(x, y, speed = 3, img = null) {
+    super(x, y, speed, img);
     this.lives = 3;
-    this.color = color(255, 0, 0); // Rojo para distinguirlo
+    this.color = color(255, 0, 0);
   }
 
   show() {
-    fill(this.color);
-    rect(this.x, this.y, this.w + 10, this.h + 10);
-    fill(255);
-    textSize(12);
-    textAlign(CENTER);
-    text(this.lives, this.x + this.w / 2 + 5, this.y + this.h / 2 + 5);
+    if (this.img) {
+      image(this.img, this.x, this.y, this.w, this.h);
+      fill(255);
+      textSize(12);
+      textAlign(CENTER);
+      text(this.lives, this.x + this.w / 2, this.y + this.h / 2 + 5);
+    } else {
+      fill(this.color);
+      rect(this.x, this.y, this.w + 10, this.h + 10);
+      fill(255);
+      textSize(12);
+      textAlign(CENTER);
+      text(this.lives, this.x + this.w / 2 + 5, this.y + this.h / 2 + 5);
+    }
   }
 
   hit() {
@@ -27,8 +33,8 @@ class StrongEnemy extends Enemy {
 }
 
 class ErraticEnemy extends Enemy {
-  constructor(x, y, speed = 9) { // Aumento la velocidad base a 9
-    super(x, y, speed);
+  constructor(x, y, speed = 9, img = null) {
+    super(x, y, speed, img);
     this.moveTimer = 0;
     this.moveInterval = random(30, 80);
     this.xDirection = random([-1, 1]);
@@ -39,7 +45,7 @@ class ErraticEnemy extends Enemy {
   update() {
     this.x += this.xDirection * this.speed;
     this.y += this.yDirection;
-    this.y += 0.5; // Fuerza constante hacia abajo
+    this.y += 0.5;
 
     this.moveTimer++;
     if (this.moveTimer > this.moveInterval) {
@@ -54,19 +60,23 @@ class ErraticEnemy extends Enemy {
       this.x = constrain(this.x, 0, width - this.w);
     }
 
-    if (this.y + this.h > height * 0.7 || this.y < 0) {
+    if (this.y + this.h > height || this.y < 0) {
       this.yDirection *= -1;
-      this.y = constrain(this.y, 0, height * 0.7 - this.h);
+      this.y = constrain(this.y, 0, height - this.h);
     }
   }
 
   show() {
-    fill(this.color);
-    rect(this.x, this.y, this.w, this.h);
+    if (this.img) {
+      image(this.img, this.x, this.y, this.w, this.h);
+    } else {
+      fill(this.color);
+      rect(this.x, this.y, this.w, this.h);
+    }
   }
 }
 
-class EnemyBullet { // Esta clase sí es específica de los niveles con enemigos que disparan
+class EnemyBullet {
   constructor(x, y, speed = 5) {
     this.x = x;
     this.y = y;
@@ -180,19 +190,21 @@ function iniciarNivel2() {
   enemies = [];
   direccionEnemigo = 1;
 
+  // Enemigos normales
   for (let i = 0; i < 3; i++) {
-    enemies.push(new Enemy(100 + i * 100, 60));
+    enemies.push(new Enemy(100 + i * 100, 60, 5, enemieImg));
   }
 
-  enemies.push(new ErraticEnemy(50, 100));
-  enemies.push(new ErraticEnemy(width - 100, 150));
-  enemies.push(new ErraticEnemy(width / 2 - 50, 200));
-  enemies.push(new ErraticEnemy(150, 250));
-  enemies.push(new ErraticEnemy(width - 200, 300));
-  enemies.push(new ErraticEnemy(20, 200));
-  enemies.push(new ErraticEnemy(width - 70, 220));
+  enemies.push(new ErraticEnemy(50, 100, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(width - 100, 150, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(width / 2 - 50, 200, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(150, 250, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(width - 200, 300, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(20, 200, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(width - 70, 220, 9, erraticEnemyImg));
 
-  enemies.push(new StrongEnemy(width / 2, 30));
+
+  enemies.push(new StrongEnemy(width / 2, 30, 3, strongEnemyImg));
 
   enemyBullets = [];
 }
