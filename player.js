@@ -1,11 +1,13 @@
 class Player {
-  constructor(x, y) {
+  constructor(x, y, nombre, score) {
     this.x = x;
     this.y = y;
-    this.width = 28;
-    this.height = 28;
+    this.width = 20;
+    this.height = 20;
     this.speed = 1;
     this.lives = 3;
+    this.nombre = nombre;
+    this.score = score;
   }
 
   dibujar() {

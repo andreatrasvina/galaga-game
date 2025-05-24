@@ -15,6 +15,7 @@ let siguienteNivel = "";
 let estadoPrevio = "";
 
 let player;
+let nombre = "";
 let bullets = [];
 
 let enemies = [];
@@ -34,7 +35,8 @@ function preload() {
 
 function setup() {
   createCanvas(500, 600);
-  player = new Player(240, 530);
+  if (!nombre) nombre = "Desconocido";
+  player = new Player(240, 530, nombre, 0);
 
   // Creamos los enemigos iniciales para el nivel 1
   for (let i = 0; i < 5; i++) {
@@ -95,6 +97,19 @@ function draw() {
 function keyPressed() {
   if (estadoJuego === "menu" && keyCode === ENTER) {
     estadoJuego = "nivel1";
+    reiniciarJuego();
+  }
+
+  if (estadoJuego === "gameOver" || estadoJuego === "mostrarVictoria") {
+    if (keyCode === ENTER) {
+      const input = document.getElementById("nombreInput");
+      const nombreIngresado = input.value.trim() || "Jugador";
+      guardarPuntaje(nombreIngresado, player.score); 
+      ocultarInputNombre();
+      estadoJuego = "menu";
+      reiniciarJuego();
+    }
+    return;
   }
 
   //espacio para añadir balas al array
