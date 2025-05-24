@@ -9,17 +9,21 @@ function mostrarMenu() {
 }
 
 function mostrarPausa() {
-    fill(255);
-    textAlign(CENTER, CENTER);
-    textSize(32);
-    text("Pausa", width / 2, height / 2);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(30);
+  text("Juego en pausa", width / 2, height / 2 - 20);
+  textSize(18);
+  text("Presiona 'P' para continuar", width / 2, height / 2 + 20);
 }
 
 function mostrarVictoria() {
     fill(255);
     textAlign(CENTER, CENTER);
     textSize(32);
-    text("GANASTEIS!!!", width / 2, height / 2);
+    text("GANASTEIS!!!", width / 2, height / 2 - 20);
+    textSize(20);
+    text("Presiona ENTER para regresar al menu", width / 2, height / 2 + 20);
 }
 
 function mostrarGameOver() {

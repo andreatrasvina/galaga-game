@@ -6,6 +6,8 @@ let mostrarTransicion = false;
 let tiempoTransicion = 0;
 let siguienteNivel = "";
 
+let estadoPrevio = "";
+
 let player;
 let bullets = [];
 
@@ -78,38 +80,40 @@ function draw() {
   }
 }
 
-//espacio para añadir balas al array
+
 function keyPressed() {
   if (estadoJuego === "menu" && keyCode === ENTER) {
     estadoJuego = "nivel1";
   }
 
-  if (key === ' ') {
+  //espacio para añadir balas al array
+  if(key === ' ') {
     bullets.push(new Bullet(player.x + player.width / 2, player.y));
   }
 
-  if (estadoJuego === "nivel1" && key === 'p') {
-    estadoJuego = "pausa";
+  if((estadoJuego === "nivel1" || estadoJuego === "nivel2" || estadoJuego === "nivel3") && key === 'p'){
+    estadoPrevio = estadoJuego;  
+    estadoJuego = "pausa";       
   } else if (estadoJuego === "pausa" && key === 'p') {
-    estadoJuego = "nivel1";
+    estadoJuego = estadoPrevio;  
   }
 
   //iniciar nivel 2
-  if (enemies.length === 0 && estadoJuego === "nivel1") {
+  if(enemies.length === 0 && estadoJuego === "nivel1") {
   iniciarNivel2();
   estadoJuego = "transicionNivel";
   siguienteNivel = "nivel2";
-  tiempoTransicion = 120; // ~2 segundos a 60fps
+  tiempoTransicion = 90;
   }
 
-  if (enemies.length === 0 && estadoJuego === "nivel2") {
+  if(enemies.length === 0 && estadoJuego === "nivel2") {
     iniciarNivel3();
     estadoJuego = "transicionNivel";
     siguienteNivel = "nivel3";
     tiempoTransicion = 120;
   }
 
-  if (estadoJuego === "gameOver" && keyCode === ENTER) {
+  if((estadoJuego === "gameOver" || estadoJuego === "mostrarVictoria") && keyCode === ENTER) {
     estadoJuego = "menu";
     reiniciarJuego();
   }
