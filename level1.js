@@ -19,8 +19,6 @@ function actualizarNivel1() {
 
   for (let i = enemies.length - 1; i >= 0; i--) {
     let currentEnemy = enemies[i];
-    currentEnemy.update();
-    currentEnemy.show();
 
     // colision con el player 
     if (currentEnemy.y + currentEnemy.h > height) {
