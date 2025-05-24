@@ -37,7 +37,7 @@ function actualizarNivel3() {
     // Lógica de disparo enemigo
     let shootProb = 0.025; // Probabilidad general de disparo
     if (currentEnemy instanceof StrongEnemy) {
-      shootProb = 0.04; // StrongEnemies disparan un poco más seguido
+      shootProb = 0.04;
     }
     if (random(1) < shootProb) {
       enemyBullets.push(new EnemyBullet(currentEnemy.x + currentEnemy.w / 2, currentEnemy.y + currentEnemy.h));
@@ -107,34 +107,24 @@ function nivel3() {
 
 // Función que inicializa el Nivel 3
 function iniciarNivel3() {
-  enemies = []; // Limpiar los enemigos del nivel anterior
-  direccionEnemigo = 1; // Resetear la dirección de los enemigos estándar
-  enemyBullets = []; // Limpiar las balas enemigas
+  enemies = []; direccionEnemigo = 1; enemyBullets = [];
+  enemies.push(new StrongEnemy(width / 4 - 20, 50, 4, strongEnemyImg));
 
-  // Agrega los 3 StrongEnemy
-  // Posición inicial: anchos de 40 (StrongEnemy por defecto)
-  // Primer StrongEnemy (izquierda)
-  enemies.push(new StrongEnemy(width / 4 - 20, 50, 4));
-
-  // Segundo StrongEnemy (el del medio - naranja y con 7 vidas)
-  let orangeStrongEnemy = new StrongEnemy(width / 2 - 20, 50, 4);
+  let orangeStrongEnemy = new StrongEnemy(width / 2 - 20, 50, 4, bossEnemyImg);
   orangeStrongEnemy.color = color(255, 100, 0); // Establece el color naranja
   orangeStrongEnemy.lives = 7; // Establece 7 vidas
   enemies.push(orangeStrongEnemy);
 
-  // Tercer StrongEnemy (derecha)
-  enemies.push(new StrongEnemy(width * 3 / 4 - 20, 50, 4));
+  enemies.push(new StrongEnemy(width * 3 / 4 - 20, 50, 4, strongEnemyImg));
 
-
-  // Añadimos algunos enemigos ERRÁTICOS (azules)
-  enemies.push(new ErraticEnemy(50, 150));
-  enemies.push(new ErraticEnemy(width - 100, 180));
-  enemies.push(new ErraticEnemy(width / 2 - 50, 210));
+  enemies.push(new ErraticEnemy(50, 150, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(width - 100, 180, 9, erraticEnemyImg));
+  enemies.push(new ErraticEnemy(width / 2 - 50, 210, 9, erraticEnemyImg));
 
   // Añadimos más enemigos estándar (verdes)
   for (let j = 0; j < 2; j++) {
     for (let i = 0; i < 5; i++) {
-      enemies.push(new Enemy(30 + i * 70, 250 + j * 40, 5));
+      enemies.push(new Enemy(30 + i * 70, 250 + j * 40, 5, enemieImg));
     }
   }
 }
