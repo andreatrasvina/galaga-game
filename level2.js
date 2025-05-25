@@ -128,16 +128,17 @@ function actualizarNivel2() {
     currentEnemy.update();
     currentEnemy.show();
 
-    // Colisión con el fondo o con el jugador (Game Over)
     if (currentEnemy.y + currentEnemy.h > height) {
       console.log("¡Un enemigo llegó al fondo! Game Over.");
       estadoJuego = "gameOver";
-      return; // Salir de la función inmediatamente si el juego ha terminado
+       shootEnemy.play();
+      return; 
     }
     if (currentEnemy.colisionaConJugador(player)) {
       console.log("¡Un enemigo colisionó con el jugador! Game Over.");
       estadoJuego = "gameOver";
-      return; // Salir de la función inmediatamente si el juego ha terminado
+       shootEnemy.play();
+      return; 
     }
 
     // Lógica de disparo enemigo
@@ -152,12 +153,14 @@ function actualizarNivel2() {
     // Lógica de colisiones de balas del jugador con enemigos
     for (let j = bullets.length - 1; j >= 0; j--) {
       if (bullets[j].colision(currentEnemy)) {
+        shootEnemy.play();
         player.score += 1;
 
 
         if (currentEnemy instanceof StrongEnemy) {
           if (currentEnemy.hit()) {
             player.score += 3;
+            shootEnemy.play();
 
             enemies.splice(i, 1);
             enemyDestroyed = true;
@@ -194,6 +197,7 @@ function nivel2() {
     enemyBullets[i].dibujar();
     if (enemyBullets[i].colision(player)) {
       player.score -= 1;
+      shootEnemy.play();
       console.log("¡Te golpeó una bala enemiga!");
       enemyBullets.splice(i, 1);
       player.lives--;

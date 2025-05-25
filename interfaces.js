@@ -69,7 +69,7 @@ function mostrarVictoria() {
   fill(255);
   textSize(32);
   textAlign(CENTER, CENTER);
-  text("HABEIS GANADO OSTIA CHAVAL", width / 2, height / 2 - 50);
+  text("Felicidades, haz ganado", width / 2, height / 2 - 50);
   textSize(20);
   text("Ingresa tu nombre y presiona ENTER", width / 2, height / 2 + 50);
   mostrarInputNombre();

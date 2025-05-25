@@ -5,7 +5,7 @@ class Player {
     this.width = 20;
     this.height = 20;
     this.speed = 1;
-    this.lives = 50;
+    this.lives = 4;
     this.nombre = nombre;
     this.score = score || 0;
   }

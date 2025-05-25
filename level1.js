@@ -22,12 +22,14 @@ function actualizarNivel1() {
 
     // colision con el player 
     if (currentEnemy.y + currentEnemy.h > height) {
+      shootEnemy.play();
       console.log("¡Un enemigo llegó al fondo! Game Over.");
       estadoJuego = "gameOver";
       return;
 
     }
     if (currentEnemy.colisionaConJugador(player)) {
+      shootEnemy.play();
       console.log("¡Un enemigo colisionó con el jugador! Game Over.");
       estadoJuego = "gameOver";
       return;
@@ -56,6 +58,7 @@ function nivel1() {
     for (let j = enemies.length - 1; j >= 0; j--) {
       if (bullets[i].colision(enemies[j])) {
         player.score += 1;
+        shootEnemy.play();
         console.log("Score actualizado:", player.score);
         enemies.splice(j, 1);
         bullets.splice(i, 1);

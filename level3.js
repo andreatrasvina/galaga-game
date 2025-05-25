@@ -21,16 +21,17 @@ function actualizarNivel3() {
     currentEnemy.update();
     currentEnemy.show();
 
-    // Colisión con el fondo o con el jugador (Game Over)
+    // Colisión con el fondo o con el jugador 
     if (currentEnemy.y + currentEnemy.h > height) {
       console.log("¡Un enemigo llegó al fondo! Game Over.");
       estadoJuego = "gameOver";
-      return; // Salir de la función inmediatamente si el juego ha terminado
+      return; 
     }
     if (currentEnemy.colisionaConJugador(player)) {
+       shootEnemy.play();
       console.log("¡Un enemigo colisionó con el jugador! Game Over.");
       estadoJuego = "gameOver";
-      return; // Salir de la función inmediatamente si el juego ha terminado
+      return; 
     }
 
     // Lógica de disparo enemigo
@@ -40,6 +41,8 @@ function actualizarNivel3() {
     }
     if (random(1) < shootProb) {
       enemyBullets.push(new EnemyBullet(currentEnemy.x + currentEnemy.w / 2, currentEnemy.y + currentEnemy.h));
+      shootEnemy2.play()
+      shootEnemy2.setLoop(false);
     }
 
     // Lógica de colisiones de balas del jugador con enemigos
@@ -49,6 +52,7 @@ function actualizarNivel3() {
 
         if (currentEnemy instanceof StrongEnemy) {
           player.score += 1;
+          shootEnemy.play();
           if (currentEnemy.hit()) {
             enemies.splice(i, 1);
             enemyDestroyed = true;
@@ -70,13 +74,14 @@ function actualizarNivel3() {
     }
   }
 }
+
 // Función que dibuja los elementos del Nivel 3 en cada frame
 function nivel3() {
 
-  actualizarNivel3(); // Llama a la lógica de actualización del nivel
+  actualizarNivel3(); 
 
-  player.dibujar(); // Dibuja al jugador
-  player.mover(); // Mueve al jugador
+  player.dibujar(); 
+  player.mover(); 
 
   // Dibuja y mueve las balas del jugador
   for (let i = bullets.length - 1; i >= 0; i--) {
@@ -93,11 +98,12 @@ function nivel3() {
     enemyBullets[i].dibujar();
     if (enemyBullets[i].colision(player)) {
       player.score -= 1;
+      shootEnemy.play();
       console.log("¡Te golpeó una bala enemiga!");
-      enemyBullets.splice(i, 1); // Elimina la bala enemiga al colisionar
-      player.lives--; // Resta una vida al jugador
+      enemyBullets.splice(i, 1); 
+      player.lives--; 
       if (player.lives <= 0) {
-        estadoJuego = "gameOver"; // Si no quedan vidas, Game Over
+        estadoJuego = "gameOver"; 
       }
     }
   }
@@ -120,8 +126,8 @@ function iniciarNivel3() {
   enemies.push(new ErraticEnemy(width / 2 - 50, 210, 9, erraticEnemyImg));
 
   // Añadimos más enemigos estándar (verdes)
-  for (let j = 0; j < 2; j++) {
-    for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 1; j++) {
+    for (let i = 0; i < 3; i++) {
       enemies.push(new Enemy(30 + i * 70, 250 + j * 40, 5, enemieImg));
     }
   }

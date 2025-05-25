@@ -34,9 +34,18 @@ function preload() {
   erraticEnemyImg = loadImage('assets/images/erratic.png');
   bossEnemyImg = loadImage('assets/images/boss.png');
   imgVida = loadImage('assets/images/vidas.png');
+  shootSound = loadSound('assets/sounds/jugadordisparo.wav');
+  shootEnemy = loadSound('assets/sounds/impactojugador.wav');
+  shootEnemy2 = loadSound('assets/sounds/disparoenemigo.wav');
+  musicabonita = loadSound('assets/sounds/musicabonita.wav');
+  starmusic = loadSound('assets/sounds/menumusic.wav');
 }
 
 function setup() {
+  musicabonita.setVolume(0.80);  // Ajusta según lo que necesites
+  musicabonita.loop();  
+  shootEnemy.setVolume(0.2);
+  shootEnemy2.setVolume(0.2);
   createCanvas(500, 600);
 
   for (let i = 0; i < 100; i++) {
@@ -130,6 +139,7 @@ function keyPressed() {
   //espacio para añadir balas al array
   if (key === ' ') {
     bullets.push(new Bullet(player.x + player.width / 2, player.y));
+    shootSound.play();
   }
 
   if ((estadoJuego === "nivel1" || estadoJuego === "nivel2" || estadoJuego === "nivel3") && key === 'p') {
