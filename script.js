@@ -16,6 +16,7 @@ let estadoPrevio = "";
 
 let player;
 let nombre = "";
+let score;
 let bullets = [];
 
 let enemies = [];
@@ -38,7 +39,7 @@ function preload() {
 function setup() {
   createCanvas(500, 600);
   if (!nombre) nombre = "Desconocido";
-  player = new Player(240, 530, nombre, 0);
+  player = new Player(240, 530, nombre, score);
 
   // Creamos los enemigos iniciales para el nivel 1
   for (let i = 0; i < 5; i++) {
@@ -151,7 +152,7 @@ function keyPressed() {
 }
 
 function reiniciarJuego() {
-  player = new Player(240, 530);
+  player = new Player(240, 530, nombre, score);
   bullets = [];
   enemies = [];
   enemyBullets = [];

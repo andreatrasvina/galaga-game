@@ -7,7 +7,7 @@ class Player {
     this.speed = 1;
     this.lives = 3;
     this.nombre = nombre;
-    this.score = score;
+    this.score = score || 0;
   }
 
   dibujar() {
