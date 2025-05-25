@@ -115,8 +115,8 @@ function iniciarNivel3() {
   enemies.push(new StrongEnemy(width / 4 - 20, 50, 4, strongEnemyImg));
 
   let orangeStrongEnemy = new StrongEnemy(width / 2 - 20, 50, 4, bossEnemyImg);
-  orangeStrongEnemy.color = color(255, 100, 0); // Establece el color naranja
-  orangeStrongEnemy.lives = 7; // Establece 7 vidas
+  orangeStrongEnemy.color = color(255, 100, 0); 
+  orangeStrongEnemy.lives = 7; 
   enemies.push(orangeStrongEnemy);
 
   enemies.push(new StrongEnemy(width * 3 / 4 - 20, 50, 4, strongEnemyImg));
@@ -125,7 +125,7 @@ function iniciarNivel3() {
   enemies.push(new ErraticEnemy(width - 100, 180, 9, erraticEnemyImg));
   enemies.push(new ErraticEnemy(width / 2 - 50, 210, 9, erraticEnemyImg));
 
-  // Añadimos más enemigos estándar (verdes)
+  // Añadimos más enemigos estándar 
   for (let j = 0; j < 1; j++) {
     for (let i = 0; i < 3; i++) {
       enemies.push(new Enemy(30 + i * 70, 250 + j * 40, 5, enemieImg));

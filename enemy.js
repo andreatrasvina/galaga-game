@@ -1,4 +1,3 @@
-// enemy.js
 class Enemy {
   constructor(x, y, speed = 5, img = null) {
     this.x = x;
@@ -7,7 +6,7 @@ class Enemy {
     this.h = 50;
     this.speed = speed;
     this.img = img;
-    this.color = color(255, 0, 0); // fallback si no hay imagen
+    this.color = color(255, 0, 0); 
   }
 
   update() {
@@ -27,7 +26,6 @@ class Enemy {
     }
   }
 
-  // Nuevo método: Verifica si el enemigo colisiona con el jugador
   colisionaConJugador(player) {
     return (
       this.x < player.x + player.width &&

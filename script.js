@@ -1,6 +1,6 @@
 let estadoJuego = "menu";
-let enemyBullets = [];  // Necesario para balas enemigas en nivel 2
-let zigzagTimer = 0;    // Timer para zigzag en nivel 2
+let enemyBullets = [];  
+let zigzagTimer = 0;   
 
 let playerImg;
 let enemieImg;
@@ -42,8 +42,8 @@ function preload() {
 }
 
 function setup() {
-  musicabonita.setVolume(0.80);  // Ajusta según lo que necesites
-  musicabonita.loop();  
+  starmusic.setVolume(0.80); 
+  starmusic.loop();  
   shootEnemy.setVolume(0.2);
   shootEnemy2.setVolume(0.2);
   createCanvas(500, 600);

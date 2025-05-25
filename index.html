@@ -7,9 +7,10 @@
   <title>Proyecto Final</title>
   <link rel="stylesheet" href="style.css">
   
-  <!-- Solo UNA versión de p5.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 </head>
 
 
@@ -28,24 +29,34 @@
 
 </body>
 
-<input type="text" id="nombreInput" placeholder="Ingresa tu nombre" class="nombre" style="
+<input
+  type="text"
+  id="nombreInput"
+  placeholder="Ingresa tu nombre"
+  class="nombre"
+  style="
     display: none;
     position: fixed;
     top: 35vh;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 320px;
-    font-size: 20px;
-    padding: 12px;
+    font-size: 10px;
+    padding: 14px 16px;
     border: 2px solid #00ffff;
-    border-radius: 6px;
-    background-color: black;
+    border-radius: 8px;
+    background-color: #000000cc;
     color: #00ffff;
     text-align: center;
     font-family: 'Press Start 2P', monospace;
-    box-shadow: 0 0 8px #00ffff;
+    box-shadow: 0 0 12px #00ffff, inset 0 0 6px #00ffff;
     outline: none;
-    z-index: 10;
-  " />
+    z-index: 999;
+    transition: all 0.3s ease;
+  "
+  onfocus="this.style.boxShadow='0 0 18px #00ffff, inset 0 0 8px #00ffff';"
+  onblur="this.style.boxShadow='0 0 12px #00ffff, inset 0 0 6px #00ffff';"
+/>
+
 
 </html>
