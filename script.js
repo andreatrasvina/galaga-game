@@ -1,4 +1,4 @@
-let estadoJuego = "menu";
+let estadoJuego = "nivel2";
 let enemyBullets = [];  // Necesario para balas enemigas en nivel 2
 let zigzagTimer = 0;    // Timer para zigzag en nivel 2
 

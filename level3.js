@@ -61,6 +61,12 @@ function actualizarNivel3() {
         break;
       }
     }
+    console.log("Enemigos restantes en Nivel 3: " + enemies.length);
+
+    if (enemies.length === 0) {
+      console.log("elpepeyeletesech")
+      estadoJuego = "mostrarVictoria";
+    }
   }
 }
 // Función que dibuja los elementos del Nivel 3 en cada frame

@@ -36,6 +36,7 @@ function actualizarNivel1() {
 
     for (let j = bullets.length - 1; j >= 0; j--) {
       if (bullets[j].colision(currentEnemy)) {
+        score += 10;
         enemies.splice(i, 1);
         bullets.splice(j, 1);
         break;
