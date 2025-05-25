@@ -16,7 +16,7 @@ let estadoPrevio = "";
 
 let player;
 let nombre = "";
-let score;
+let score = 0;
 let bullets = [];
 
 let enemies = [];
@@ -135,7 +135,7 @@ function keyPressed() {
     iniciarNivel2();
     estadoJuego = "transicionNivel";
     siguienteNivel = "nivel2";
-    tiempoTransicion = 90;
+    tiempoTransicion = 120;
   }
 
   if (enemies.length === 0 && estadoJuego === "nivel2") {
@@ -152,6 +152,7 @@ function keyPressed() {
 }
 
 function reiniciarJuego() {
+  score = 0;
   player = new Player(240, 530, nombre, score);
   bullets = [];
   enemies = [];

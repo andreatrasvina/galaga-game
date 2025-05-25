@@ -29,7 +29,6 @@ class Enemy {
 
   // Nuevo método: Verifica si el enemigo colisiona con el jugador
   colisionaConJugador(player) {
-    // Cálculo de colisión simple basado en rectángulos (puedes ajustar si tus imágenes tienen formas más complejas)
     return (
       this.x < player.x + player.width &&
       this.x + this.w > player.x &&

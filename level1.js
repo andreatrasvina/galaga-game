@@ -32,16 +32,6 @@ function actualizarNivel1() {
       estadoJuego = "gameOver";
       return;
     }
-    // *******************************************************************
-
-    for (let j = bullets.length - 1; j >= 0; j--) {
-      if (bullets[j].colision(currentEnemy)) {
-        score += 10;
-        enemies.splice(i, 1);
-        bullets.splice(j, 1);
-        break;
-      }
-    }
   }
 
   // Actualiza y dibuja enemigos
@@ -65,6 +55,8 @@ function nivel1() {
 
     for (let j = enemies.length - 1; j >= 0; j--) {
       if (bullets[i].colision(enemies[j])) {
+        player.score += 1;
+        console.log("Score actualizado:", player.score);
         enemies.splice(j, 1);
         bullets.splice(i, 1);
         break;
