@@ -38,6 +38,15 @@ function preload() {
 
 function setup() {
   createCanvas(500, 600);
+
+  for (let i = 0; i < 100; i++) {
+    estrellas.push({
+      x: random(width),
+      y: random(height),
+      velocidad: random(0.5, 2)
+    });
+  }
+
   if (!nombre) nombre = "Desconocido";
   player = new Player(240, 530, nombre, score);
 
@@ -172,4 +181,17 @@ function obtenerNumeroNivel() {
   if (estadoJuego === "nivel2") return 2;
   if (estadoJuego === "nivel3") return 3;
   return "";
+}
+
+function dibujarEstrellas() {
+  fill(255);
+  noStroke();
+  for (let estrella of estrellas) {
+    circle(estrella.x, estrella.y, 2);
+    estrella.y += estrella.velocidad;
+    if (estrella.y > height) {
+      estrella.y = 0;
+      estrella.x = random(width);
+    }
+  }
 }

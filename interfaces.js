@@ -1,21 +1,61 @@
+let estrellas = [];
+
 function mostrarMenu() {
-  background(30);
-  fill(255);
+  textFont('Courier New', 10);
+  background(10);
+  dibujarEstrellas();
+
   textAlign(CENTER, CENTER);
-  textSize(32);
-  text("GALAGA", width / 2, height / 2 - 100);
+  textSize(60);
+  fill(255, 255, 0);
+  stroke(255, 0, 0);
+  strokeWeight(1);
+  text("GALAGA", width / 2, 100);
+  noStroke();
+
+  fill(255);
   textSize(20);
-  text("Presiona ENTER para jugar", width / 2, height / 2 - 50);
+  text("Presiona ENTER para jugar", width / 2, 160);
+  text("Presiona P para pausar", width / 2, 190);
+
+  textSize(20);
+  fill('palegreen');
+  text("TOP SCORES", width / 2, 230);
 
   let topScores = JSON.parse(localStorage.getItem("topScores")) || [];
-  text("Top 5 Puntajes:", width / 2, height / 2);
+
+  //tabla
+  const tablaX = width / 2 - 150;
+  const tablaY = 260;
+  const filaAlto = 30;
+
+  fill(255, 255, 255, 50);
+  rect(tablaX, tablaY, 300, filaAlto * (topScores.length + 1), 10);
+
+  fill(255);
+  textSize(18);
+  textAlign(LEFT, CENTER);
+  text("Pos", tablaX + 10, tablaY + 15);
+  text("Nombre", tablaX + 60, tablaY + 15);
+  text("Puntaje", tablaX + 220, tablaY + 15);
+
   for (let i = 0; i < topScores.length; i++) {
-    let entry = topScores[i];
-    text(`${i + 1}. ${entry.nombre}: ${entry.score}`, width / 2, height / 2 + 30 + i * 25);
+    const y = tablaY + filaAlto * (i + 1);
+    fill(255, 255, 255, 30 + i * 30);
+    rect(tablaX, y, 300, filaAlto);
+    fill(255);
+    text(`${i + 1}`, tablaX + 10, y + filaAlto / 2);
+    text(`${topScores[i].nombre}`, tablaX + 60, y + filaAlto / 2);
+    text(`${topScores[i].score}`, tablaX + 220, y + filaAlto / 2);
   }
+
+  textSize(13);
+  fill('palegreen');
+  text("POR ANDREA Y HAZAEL", width / 2 - 70, 570);
 }
 
 function mostrarPausa() {
+  textFont('Courier New', 10);
   fill(255);
   textAlign(CENTER, CENTER);
   textSize(30);
@@ -25,6 +65,7 @@ function mostrarPausa() {
 }
 
 function mostrarVictoria() {
+  textFont('Courier New', 10);
   fill(255);
   textSize(32);
   textAlign(CENTER, CENTER);
@@ -35,6 +76,7 @@ function mostrarVictoria() {
 }
 
 function mostrarGameOver() {
+  textFont('Courier New', 10);
   fill(255, 0, 0);
   textSize(32);
   textAlign(CENTER, CENTER);
@@ -45,6 +87,7 @@ function mostrarGameOver() {
 }
 
 function mostrarTransicionNivel() {
+  textFont('Courier New', 10);
   fill(255);
   textAlign(CENTER, CENTER);
   textSize(28);
@@ -59,7 +102,7 @@ function mostrarTransicionNivel() {
 }
 
 function dibujarHUD() {
-  textFont('Press Start 2P');
+  textFont('Courier New', 10);
   textSize(14);
   fill(0, 255, 255);
   noStroke();
