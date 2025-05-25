@@ -28,7 +28,7 @@ function mostrarVictoria() {
   fill(255);
   textSize(32);
   textAlign(CENTER, CENTER);
-  text("GAME OVER", width / 2, height / 2 - 50);
+  text("HABEIS GANADO OSTIA CHAVAL", width / 2, height / 2 - 50);
   textSize(20);
   text("Ingresa tu nombre y presiona ENTER", width / 2, height / 2 + 50);
   mostrarInputNombre();

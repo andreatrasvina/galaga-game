@@ -152,10 +152,13 @@ function actualizarNivel2() {
     // Lógica de colisiones de balas del jugador con enemigos
     for (let j = bullets.length - 1; j >= 0; j--) {
       if (bullets[j].colision(currentEnemy)) {
-        let enemyDestroyed = false;
+        player.score += 1;
+
 
         if (currentEnemy instanceof StrongEnemy) {
           if (currentEnemy.hit()) {
+            player.score += 3;
+
             enemies.splice(i, 1);
             enemyDestroyed = true;
           }
@@ -190,6 +193,7 @@ function nivel2() {
     enemyBullets[i].mover();
     enemyBullets[i].dibujar();
     if (enemyBullets[i].colision(player)) {
+      player.score -= 1;
       console.log("¡Te golpeó una bala enemiga!");
       enemyBullets.splice(i, 1);
       player.lives--;
