@@ -69,6 +69,6 @@ function dibujarHUD() {
   text(`Score: ${player.score}`, 10, 30);
 
   for (let i = 0; i < player.lives; i++) {
-    image(imgVida, width - (i + 1) * 30 - 10, 10, 24, 24); 
+    image(imgVida, width - (i + 1) * 30 - 10, 10, 24, 24);
   }
 }
