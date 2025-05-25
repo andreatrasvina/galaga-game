@@ -77,7 +77,7 @@ class ErraticEnemy extends Enemy {
 }
 
 class EnemyBullet {
-  constructor(x, y, speed = 5) {
+  constructor(x, y, speed = 12) {
     this.x = x;
     this.y = y;
     this.r = 3;

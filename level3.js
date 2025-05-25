@@ -48,6 +48,7 @@ function actualizarNivel3() {
         let enemyDestroyed = false;
 
         if (currentEnemy instanceof StrongEnemy) {
+          player.score += 1;
           if (currentEnemy.hit()) {
             enemies.splice(i, 1);
             enemyDestroyed = true;
@@ -91,6 +92,7 @@ function nivel3() {
     enemyBullets[i].mover();
     enemyBullets[i].dibujar();
     if (enemyBullets[i].colision(player)) {
+      player.score -= 1;
       console.log("¡Te golpeó una bala enemiga!");
       enemyBullets.splice(i, 1); // Elimina la bala enemiga al colisionar
       player.lives--; // Resta una vida al jugador

@@ -3,8 +3,8 @@ class Enemy {
   constructor(x, y, speed = 5, img = null) {
     this.x = x;
     this.y = y;
-    this.w = 40;
-    this.h = 40;
+    this.w = 50;
+    this.h = 50;
     this.speed = speed;
     this.img = img;
     this.color = color(255, 0, 0); // fallback si no hay imagen
